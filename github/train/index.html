@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RDRSegmenter - Phân Tách Câu</title>
+    <script>
+        async function segmentSentence() {
+            const sentence = document.getElementById("sentence").value;
+            const response = await fetch('/segment', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({sentence})
+            });
+
+            const data = await response.json();
+            document.getElementById("result").innerText = data.result;
+        }
+    </script>
+</head>
+<body>
+    <h1>Phân Tách Câu với RDRSegmenter</h1>
+    <textarea id="sentence" rows="4" cols="50" placeholder="Nhập câu tiếng Việt tại đây..."></textarea><br><br>
+    <button onclick="segmentSentence()">Chia Câu</button>
+    <h2>Kết quả:</h2>
+    <p id="result" style="color: green; font-weight: bold;"></p>
+</body>
+</html>
